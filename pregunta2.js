@@ -20,7 +20,7 @@
     inventory[article] = inventory[article] - cant;
     messageCode = 200;
   }else {
-    messageCode = "Imposible de realizar la venta";
+    messageCode = 500;
   }
   return messageCode;
 }
