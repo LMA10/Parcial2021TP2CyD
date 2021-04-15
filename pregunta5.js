@@ -2,7 +2,8 @@
  * En el siguiente array de objetos (beers) se requiere actualizar el repositorio donde se encuentra almacenadas
  * los archivos de las etiquetas (label). Dicha actualizacion debe mantener la carpeta.
  * 
- * El nuevo repositorio se encuentra en SharePoint Online, en un sitio de Tecnoshare, por tanto la url de la etiqueta quedará de la siguiente forma:
+ * El nuevo repositorio se encuentra en SharePoint Online, en un sitio de Tecnoshare, por tanto la url de la etiqueta 
+ * quedará de la siguiente forma:
  * https://tecnoshare.sharepoint.com/sites/beer/[carpeta]/[nombre_archivo]
  * 
  * Ademas se requiere que el nombre del archivo sea reemplazado por el nombre de la cerveza por ejemplo para Darkness sera:
@@ -19,4 +20,36 @@ const beers = [
     { name: 'Belgian Wit', abv: 5.4, label: 'https://s3.amazonaws.com/brewerydbapi/beer/3CvVQG/upload_xOMnlK-large.png', type: 'Wheat' },
     { name: 'Stolen Fruit', abv: 4.6, label: 'https://s3.amazonaws.com/brewerydbapi/beer/YGT30k/upload_uVCHP7-large.png', type: 'Wheat' },
 ];
+
+
+function modifyBlankSpaces(beers){
+  return beers.map(beer => {
+    return beer.replace(" ","_")
+  })
+}
+
+function replaceUrlName(beers){
+    return beers.map(beer  => {
+      return beer.label.replace('brewerydbapi','sites') 
+  })
+}
+
+function setLabelFileName(beers){
+  return beers
+    .map( beer => ({
+        label: beer.label.replace(String(beer.label.split('/').pop()),beer.name) 
+        })
+        
+    );
+}
+
+function showNewSites(urls){
+    return beers.map((beer,i) => ({
+      ...beer,label: urls[i]})
+    )
+}
+
+ let urlsModified = modifyBlankSpaces(modifyBlankSpaces(replaceUrlName(setLabelFileName(beers))))
+
+ console.log(showNewSites(urlsModified))
 

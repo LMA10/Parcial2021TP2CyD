@@ -6,6 +6,25 @@
  * Si la cantidad es mayor al stock existente, no se actualiza el objeto y se retorna el codigo 500 'Imposible de realizar la venta'
  * 
  */
+/**
+ * 
+ * @param {String} article 
+ * @param {int} cant 
+ * @return codigo valor entero
+ */
+ const sale = function (article, cant){
+
+  let messageCode = "";
+
+  if (inventory[article] >= cant) {
+    inventory[article] = inventory[article] - cant;
+    messageCode = 200;
+  }else {
+    messageCode = "Imposible de realizar la venta";
+  }
+  return messageCode;
+}
+
 
  const inventory = {
     shoes: 10,
@@ -13,10 +32,6 @@
     shirts: 10,
     pants: 5,
   }
-
-const sale = function (article, cant){
-  
-}
 
 // TESTS (no modificar)
 console.log(sale('shoes',8) === 200 && inventory.shoes === 2);

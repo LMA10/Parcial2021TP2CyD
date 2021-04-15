@@ -19,10 +19,15 @@
    * Función que agrega descubrimientos en el array de inventors
    * @param {*} inventor 
    * @param {*} discoveries 
-   * @param {*} inventors 
+   * @param {Array} inventors 
    */
   function addDiscoveries(inventor, discoveries, inventors){
-      
+       inventors.forEach((e) => {
+        if (e.last == inventor){
+           e.discoveries = discoveries;
+        } 
+      })
+      return inventors
   }
 
   console.log(addDiscoveries('Einstein', 
